@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
+app.use(express.static('public'));
+
 // Importiere - Schrauben Model
 const Schraube = require('./schraubenModel');
 
@@ -21,7 +23,6 @@ app.get('/', (req, res) => {
 });
 
 // Top 3 Schrauben: Zeigt die drei Schraubenarten, die die höchsten Verkaufszahlen aufweisen.
-
 app.get('/sales/top3', async (_req, res) => {
     try {
       const top3 = await Schraube.aggregate([
@@ -41,3 +42,4 @@ app.get('/sales/top3', async (_req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
