@@ -1,31 +1,27 @@
-
-    const labels = top3.map(schraube => schraube._id);
+(async function() {
+    const labels = ["HECO", "Wuerth", "SWG"];
     const data = {
       labels: labels,
       datasets: [{
-        label: 'Verkaufte Menge',
-        data: top3.map(schraube => schraube.count),
+        label: 'Top 3 Hersteller:',
+        data: [240233, 238764, 238343],
         backgroundColor: 'red',
         borderColor: 'blue',
         borderWidth: 1
       }]
-    };
-
+};
     new Chart(
-      document.getElementById('barchart'),
-      {
-        type: 'bar',
-        data: data,
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
+        document.getElementById('barchart'),
+        {
+          type: 'bar',
+          data: data,
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
             }
-          }
-        },
-      }
-    );
-  } catch (err) {
-    console.log('Error:', err);
-  }
-}
+          },
+        }
+      );
+    })();

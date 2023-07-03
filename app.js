@@ -38,6 +38,44 @@ app.get('/sales/top3', async (_req, res) => {
     }
   });
 
+// Top 3 Hersteller: Präsentiert die drei Hersteller mit den höchsten Verkaufszahlen.
+
+app.get('/sales/top3hersteller', async (_req, res) => {
+  try {
+    const top3hersteller = await Schraube.aggregate([
+      { $match: { VerkaufteMenge: { $gt: 0 } } }, // Filtert Dokumente mit einer Verkaufsmenge größer als 0
+      { $group: { _id: "$Hersteller", count: { $sum: "$VerkaufteMenge" } } },
+      { $sort: { count: -1 } },
+      { $limit: 3 }
+    ]).allowDiskUse(true);
+
+    res.json(top3hersteller);
+    console.log(top3hersteller);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Bester Verkaufstag insgesamt: Identifiziert und zeigt den Tag mit den höchsten Gesamtverkaufszahlen an.
+
+app.get('/sales/besterTag', async (_req, res) => {
+  try { 
+  const besterTag = await Schraube.aggregate([
+     { $group: { _id: "$Datum", count: { $sum: "$VerkaufteMenge" } } },
+     { $sort: { count: -1 } },
+     { $limit: 1 }
+]).allowDiskUse(true);
+
+res.json(besterTag);
+console.log(besterTag);
+} catch (err) {
+console.log('Error:', err);
+res.status(500).json({ error: 'Internal server error' });
+}
+});
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
