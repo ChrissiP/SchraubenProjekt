@@ -9,9 +9,7 @@ const Schraube = require('./schraubenModel');
 
 // MongoDB connection // Dashboard = Database name, nicht die Collection Name!
 
-mongoose.connect('mongodb+srv://karinpavic:1234567kmp@cluster0.ysd3g8i.mongodb.net/Dashboard?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect('mongodb+srv://karinpavic:1234567kmp@cluster0.ysd3g8i.mongodb.net/Dashboard?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true
   })
   .then(() => {
     console.log('MongoDB connected...');
