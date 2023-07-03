@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Importiere - Schrauben Model
-const schraubenModel = require('./schraubenModel');
+const Schraube = require('./schraubenModel');
 
-mongoose
-  .connect('mongodb+srv://stefan:JZhdDNnSOFHEeuLA@cluster0.nrfdwae.mongodb.net/ha_schrauben?retryWrites=true&w=majority', {
+// MongoDB connection // Dashboard = Database name, nicht die Collection Name!
+
+mongoose.connect('mongodb+srv://karinpavic:1234567kmp@cluster0.ysd3g8i.mongodb.net/Dashboard?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -19,9 +20,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/sales/top3', async (req, res) => {
+// Top 3 Schrauben: Zeigt die drei Schraubenarten, die die höchsten Verkaufszahlen aufweisen.
+
+app.get('/sales/top3', async (_req, res) => {
     try {
-      const top3 = await schraubenModel.aggregate([
+      const top3 = await Schraube.aggregate([
+        { $match: { VerkaufteMenge: { $gt: 0 } } }, // Filtert Dokumente mit einer Verkaufsmenge größer als 0
         { $group: { _id: "$Schraube", count: { $sum: "$VerkaufteMenge" } } },
         { $sort: { count: -1 } },
         { $limit: 3 }
@@ -34,7 +38,6 @@ app.get('/sales/top3', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
-  
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
