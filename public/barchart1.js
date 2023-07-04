@@ -1,27 +1,41 @@
-(async function() {
-  const labels = ["2023-06-13", "2023-06-01", "2023-06-02"];
+async function createChart() {
+  // Fetch data from the server
+  const response = await fetch('http://localhost:3000/sales/besterTag');
+  const result = await response.json();
+  console.log(result)
+
+  // Convert data into Chart.js format
+  const labels = result.map(entry => entry._id);
+  const datasetData = result.map(entry => entry.count);
+  console.log(datasetData);
+  
+
   const data = {
     labels: labels,
     datasets: [{
-      label: 'Bester Tag:',
-      data: [25861, 20920, 20063],
-      backgroundColor: 'yellow',
-      borderColor: 'blue',
+      label: 'Bester Verkaufstag',
+      data: datasetData,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 1
     }]
-};
+  };
+console.log(data);
+//Erstelle den Chart 
   new Chart(
-      document.getElementById('barchart1'),
-      {
-        type: 'bar',
-        data: data,
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
+    document.getElementById('barchart1'),
+    {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
           }
-        },
-      }
-    );
-  })();
+        }
+      },
+    }
+  );
+}
+
+createChart();
