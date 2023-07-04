@@ -77,6 +77,39 @@ res.status(500).json({ error: 'Internal server error' });
 }
 });
 
+// Route zum Abrufen des prozentualen Anteils der verkauften Schrauben eines Herstellers
+app.get('/sales/percentage/:Hersteller', async (req, res) => {
+  try {
+    const Hersteller = req.params.Hersteller;
+
+    // GesamtverkaufteMenge aller Schrauben berechnen
+    const totalSales = await Schraube.aggregate([
+      { $group: { _id: null, total: { $sum: "$VerkaufteMenge" } } }
+    ]);
+
+    // VerkaufteMenge des spezifischen Herstellers berechnen
+    const herstellerSales = await Schraube.aggregate([
+      { $match: { Hersteller: Hersteller } },
+      { $group: { _id: null, total: { $sum: "$VerkaufteMenge" } } }
+    ]);
+
+    if (totalSales.length === 0 || herstellerSales.length === 0) {
+      res.status(404).json({ error: 'Hersteller oder Daten nicht gefunden' });
+      return;
+    }
+
+    const total = totalSales[0].total;
+    const herstellerTotal = herstellerSales[0].total;
+
+    // Prozentualen Anteil berechnen
+    const percentage = (herstellerTotal / total) * 100;
+
+    res.json({ Hersteller, percentage });
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
