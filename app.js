@@ -110,6 +110,57 @@ app.get('/sales/percentage/:Hersteller', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+// Umsatz pro Schraubenart pro Monat: Zeigt den Umsatz pro Schraubenart pro Monat an.
+app.get('/sales/umsatzProSchraubenartProMonat', async (_req, res) => {
+  try {
+    const umsatzProSchraubenartProMonat = await Schraube.aggregate([
+      {
+        $match: { VerkaufteMenge: { $gt: 0 } }
+      },
+      {
+        $addFields: {
+          convertedDatum: {
+            $dateFromString: {
+              dateString: {
+                $concat: [
+                  "$Datum", "T00:00:00Z"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraubenart: "$Schraube",
+            Jahr: { $year: "$convertedDatum" },
+            Monat: { $month: "$convertedDatum" }
+          },
+          Umsatz: { $sum: { $multiply: ["$VerkaufteMenge", "$Preis"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraubenart: "$_id.Schraubenart",
+          Jahr: "$_id.Jahr",
+          Monat: "$_id.Monat",
+          Umsatz: 1
+        }
+      },
+      {
+        $sort: { Jahr: 1, Monat: 1 }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatzProSchraubenartProMonat);
+    console.log(umsatzProSchraubenartProMonat);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;

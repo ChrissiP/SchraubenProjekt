@@ -8,8 +8,15 @@ nav(style="background-color: #333;")
       a(href="#", style="color: white;") Über uns
     li
       a(href="#", style="color: white;") Hilfe
+    
     li.search-box
       input(type="text", placeholder="Suchen")
       button(type="submit")
         i.fa.fa-search
 
+    div.dropdown-menu(style='float:right;')
+      select(name='dropdown')
+        option(value='default') Menü
+        option(value='option1', href='https://www.example.com') Option 1
+        option(value='option2', href='https://www.example.com') Option 2
+        option(value='option3', href='https://www.example.com') Option 3
