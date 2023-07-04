@@ -77,6 +77,27 @@ res.status(500).json({ error: 'Internal server error' });
 }
 });
 
+//Durchschnittlich beste Verkaufstag pro Woche
+
+app.get('/sales/besteWoche', async (_req, res) => {
+  try {
+  const besteWoche = await Schraube.aggregate([
+  { $group: {
+  _id: { $dayOfWeek: "$Datum" }, // Gruppieren nach Wochentagen
+  Verkaufszahldurchs: { $avg: "$VerkaufteMenge" } // Berechnung des Durchschnitts der Verkaufszahlen
+  }
+  },
+  { $sort: { Verkaufszahldurchs: -1 } }, // Sortieren nach der durchschnittlichen Verkaufszahl absteigend
+  { $limit: 1 }
+  ]).allowDiskUse(true);
+
+  res.json(besteWoche);
+  console.log(besteWoche);
+  } catch (err) {
+  console.log('Error:', err);
+  res.status(500).json({ error: 'Internal server error' });
+  }
+  });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

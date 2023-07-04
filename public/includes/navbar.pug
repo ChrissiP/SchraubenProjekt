@@ -1,5 +1,14 @@
-ul 
-    li Home
-    li Produkte
-    li Über uns 
-    li Hilfe
+nav(style="background-color: #333;")
+  ul
+    li
+      a(href="#", style="color: white;") Home
+    li
+      a(href="#", style="color: white;") Produkte
+    li
+      a(href="#", style="color: white;") Über uns
+    li
+      a(href="#", style="color: white;") Hilfe
+    li.search-box
+      input(type="text", placeholder="Suchen")
+      button(type="submit")
+        i.fa.fa-search
