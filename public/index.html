@@ -4,35 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="/public/styles/style.css">
+    <title>Dasboard</title>
   </head>
-  <body> </body>
 </html>
-<ul> 
-  <li>Home</li>
-  <li>Produkte</li>
-  <li>Über uns </li>
-  <li>Hilfe</li>
-</ul>
-<h3>Top 3 Schrauben:
-  <div style="width: 550px;">
-    <canvas id="doughnut"></canvas>
-  </div>
-</h3>
-<script src="doughnut.js"></script>
-<h3>Top 3 Hersteller:
-  <div style="width: 550px;">
-    <canvas id="barchart"></canvas>
-  </div>
-</h3>
-<script src="barchart.js"></script>
-<h3>Bester Tag:
-  <div style="width: 550px;">
-    <canvas id="barchart1"> </canvas>
-  </div>
-</h3>
-<script src="barchart1.js"></script>
-<ul> 
-  <li>kontakt</li>
-  <li>Nutzungsbedingungen</li>
-</ul>
+<nav style="background-color: #333;">
+  <ul>
+    <li><a href="#" style="color: white;">Home</a></li>
+    <li><a href="#" style="color: white;">Produkte</a></li>
+    <li><a href="#" style="color: white;">Über uns</a></li>
+    <li><a href="#" style="color: white;">Hilfe</a></li>
+    <li class="search-box">
+      <input type="text" placeholder="Suchen">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </li>
+  </ul>
+</nav>
+<div class="dashboard-container">
+  <h3>Top 3 Schrauben:
+    <div id="doughnutStyle" style="width: 500px;">
+      <canvas id="doughnut"></canvas>
+    </div>
+  </h3>
+  <script src="doughnut.js"></script>
+</div>
+<div class="dashboard-container">
+  <h3>Top 3 Hersteller:
+    <div id="barchartStyle" style="width: 500px;">
+      <canvas id="barchart"></canvas>
+    </div>
+  </h3>
+  <script src="barchart.js"></script>
+</div>
+<div class="dashboard-container">
+  <h3>Bester Tag:
+    <div id="barchart1Style" style="width: 500px;">
+      <canvas id="barchart1"> </canvas>
+    </div>
+  </h3>
+  <script src="barchart1.js"></script>
+</div>
+<footer>
+  <ul>
+    <li><a href="#" style="color: white;">Kontakt</a></li>
+    <li><a href="#" style="color: white;">Nutzungsbedingungen</a></li>
+  </ul>
+</footer>
