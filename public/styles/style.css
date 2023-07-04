@@ -1,0 +1,86 @@
+body {
+    background-image: url(https://img.freepik.com/free-vector/white-with-low-poly-network-connection_1017-29753.jpg?w=2000);
+    background-attachment: fixed;
+    background-size: cover;
+}
+  
+.dashboard-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+  
+h3 {
+    text-align: center;
+    font-size: large;
+    color: #333;
+    text-shadow: 50%;
+}
+  
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    opacity: 0.7;
+}
+  
+nav ul {
+    font-size: large;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+  
+nav li {
+    margin-right: 20px;
+    text-align: center;
+}
+  
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    opacity: 0.7;
+}
+  
+footer ul {
+    font-size: large;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+  
+footer li {
+    margin-right: 20px;
+    text-align: center; 
+}
+.search-box {
+    display: flex;
+    align-items: center;
+}
+  
+.search-box input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+  
+.search-box button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+  
+.search-box button[type="submit"]:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+  
