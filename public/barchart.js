@@ -1,3 +1,6 @@
+
+
+
 (async function() {
     const labels = ["HECO", "Wuerth", "SWG"];
     const data = {
