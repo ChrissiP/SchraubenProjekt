@@ -11,6 +11,13 @@ body {
     flex-direction: row;
     margin-bottom: 20px;
 }
+.dashboard-container1 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
   
 h3 {
     text-align: center;
