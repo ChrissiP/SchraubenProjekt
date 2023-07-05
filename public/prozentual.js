@@ -2,7 +2,7 @@
 async function generateChart() {
   try {
     // Daten abrufen
-    const data = await fetch('/sales/prozentual');
+    const data = await fetch('http://localhost:3000/sales/prozentual');
     const result = await data.json();
 
     // Chart-Daten vorbereiten
