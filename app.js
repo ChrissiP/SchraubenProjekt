@@ -110,6 +110,196 @@ app.get('/sales/percentage/:Hersteller', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+// Umsatz pro Schraubenart pro Monat: Zeigt den Umsatz pro Schraubenart pro Monat an.
+app.get('/sales/umsatzProSchraubenartProMonat', async (_req, res) => {
+  try {
+    const umsatzProSchraubenartProMonat = await Schraube.aggregate([
+      {
+        $match: { VerkaufteMenge: { $gt: 0 } }
+      },
+      {
+        $addFields: {
+          convertedDatum: {
+            $dateFromString: {
+              dateString: {
+                $concat: [
+                  "$Datum", "T00:00:00Z"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraubenart: "$Schraube",
+            Jahr: { $year: "$convertedDatum" },
+            Monat: { $month: "$convertedDatum" }
+          },
+          Umsatz: { $sum: { $multiply: ["$VerkaufteMenge", "$Preis"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraubenart: "$_id.Schraubenart",
+          Jahr: "$_id.Jahr",
+          Monat: "$_id.Monat",
+          Umsatz: 1
+        }
+      },
+      {
+        $sort: { Jahr: 1, Monat: 1 }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatzProSchraubenartProMonat);
+    console.log(umsatzProSchraubenartProMonat);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Gesamtumsatz pro Hersteller für einen Monat:
+app.get('/sales/m', async (_req, res) => {
+  try {
+    const umsatz = await Schraube.aggregate([
+      {
+        $group: {
+          _id: {
+            Hersteller: "$Hersteller",
+            Schraube: "$Schraube",
+            Monat: { $month: { $toDate: "$Datum" } }
+          },
+          Umsatz: { $sum: { $multiply: ["$Preis", "$VerkaufteMenge"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Hersteller: "$_id.Hersteller",
+          Schraube: "$_id.Schraube",
+          Monat: "$_id.Monat",
+          Umsatz: { $concat: [{ $toString: "$Umsatz" } , "€" ] }
+        }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatz);
+    console.log(umsatz);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// HECO 
+app.get('/sales/HECO', async (_req, res) => {
+  try {
+    const umsatz = await Schraube.aggregate([
+      {
+        $match: {
+          Hersteller: "HECO"
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraube: "$Schraube",
+            Monat: { $month: { $toDate: "$Datum" } }
+          },
+          Umsatz: { $sum: { $multiply: ["$Preis", "$VerkaufteMenge"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraube: "$_id.Schraube",
+          Monat: "$_id.Monat",
+          Umsatz: { $concat: [ "€", { $toString: "$Umsatz" } ] }
+        }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatz);
+    console.log(umsatz);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+// SWG 
+app.get('/sales/SWG', async (_req, res) => {
+  try {
+    const umsatz = await Schraube.aggregate([
+      {
+        $match: {
+          Hersteller: "SWG"
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraube: "$Schraube",
+            Monat: { $month: { $toDate: "$Datum" } }
+          },
+          Umsatz: { $sum: { $multiply: ["$Preis", "$VerkaufteMenge"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraube: "$_id.Schraube",
+          Monat: "$_id.Monat",
+          Umsatz: { $concat: [ "€", { $toString: "$Umsatz" } ] }
+        }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatz);
+    console.log(umsatz);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+// SWG 
+app.get('/sales/Wuerth', async (_req, res) => {
+  try {
+    const umsatz = await Schraube.aggregate([
+      {
+        $match: {
+          Hersteller: "Wuerth"
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraube: "$Schraube",
+            Monat: { $month: { $toDate: "$Datum" } }
+          },
+          Umsatz: { $sum: { $multiply: ["$Preis", "$VerkaufteMenge"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraube: "$_id.Schraube",
+          Monat: "$_id.Monat",
+          Umsatz: { $concat: [ "€", { $toString: "$Umsatz" } ] }
+        }
+      }
+    ]).allowDiskUse(true);
+
+    res.json(umsatz);
+    console.log(umsatz);
+  } catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
