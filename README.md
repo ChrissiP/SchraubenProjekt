@@ -29,13 +29,19 @@ $ npm install
 
 $ npm install pug-cli -g path fs
 
+$ npm install pug
+
 $ npm install express
 
 $ npm install mongoose
 
 $ npm install mongodb@4.0
 
+$ npm install cjs 
 
+$ npm install cors
+
+$ npm install node-fetch
 ```
 
 ## Verwendung
