@@ -3,10 +3,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
-.a{
-    font-size: large;
-}
-  
+ 
 .dashboard-container {
     display:flex;
     justify-content: center;
@@ -28,77 +25,153 @@ h3 {
     color: #333;
     text-shadow: 50%;
 }
-  
-nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    opacity: 0.7;
+.navbar input[type="checkbox"],
+.navbar .hamburger-lines {
+  display: none;
 }
-  
-nav ul {
-    font-size: large;
-    list-style-type: none;
+#menu__toggle {
+    opacity: 0;
+  }
+  #menu__toggle:checked + .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked + .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  #menu__toggle:checked + .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #menu__toggle:checked ~ .menu__box {
+    left: 0 !important;
+  }
+  .menu__btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #616161;
+    transition-duration: .25s;
+  }
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+  .menu__box {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
     margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    padding: 80px 0;
+    list-style: none;
+    background-color: #ECEFF1;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    transition-duration: .25s;
+  }
+  .menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition-duration: .25s;
+  }
+  .menu__item:hover {
+    background-color: #CFD8DC;
+  }
   
-nav li {
-    margin-right: 20px;
-    text-align: center;
-}
-  
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    opacity: 0.7;
+ 
+.footer {
     position: fixed;
     left: 0;
     bottom: 0;
     right: 0;
-}
-  
-footer ul {
-    font-size: large;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    width: 100%;
+    background: #3586ff;
+    min-height: 5px;
+    padding: 20px 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-  
-footer li {
-    margin-right: 20px;
-    text-align: center; 
+    flex-direction: column;
 }
 
-.search-box {
-    display: flex;
-    align-items: center;
+.wave {
+    position: absolute;
+    opacity: 60%;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: url("https://i.ibb.co/wQZVxxk/wave.png");
+    background-size: 2000px 20px;
 }
   
-.search-box input[type="text"] {
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
+.wave#wave1 {
+    z-index: 1000;
+    opacity: 10;
+    bottom: 0;
+    animation: animateWaves 4s linear infinite;
 }
   
-.search-box button[type="submit"] {
-    padding: 5px 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    margin-left: 5px;
+.wave#wave2 {
+    z-index: 999;
+    opacity: 10;
+    bottom: 2px;
+    animation: animate 4s linear infinite !important;
 }
   
-.search-box button[type="submit"]:hover {
-    background-color: #555;
-    cursor: pointer;
+.wave#wave3 {
+    z-index: 1000;
+    opacity: 0.2;
+    bottom: 4px;
+    animation: animateWaves 3s linear infinite;
 }
+  
+.wave#wave4 {
+    z-index: 999;
+    opacity: 10;
+    bottom: 6px;
+    animation: animate 3s linear infinite;
+}
+  
+@keyframes animateWaves {
+    0% {
+      background-position-x: 2000px;
+    }
+    100% {
+      background-position-x: 0;
+    }
+}
+  
+@keyframes animate {
+    0% {
+      background-position-x: -2000px;
+    }
+    100% {
+      background-position-x: 0;
+    }
+}
+  
   

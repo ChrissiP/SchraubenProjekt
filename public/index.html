@@ -10,20 +10,17 @@
   </head>
   <body> </body>
 </html>
-<nav style="background-color: #333;">
-  <ul class="justify-content-center">
-    <li><img src="https://as2.ftcdn.net/jpg/01/81/72/13/500_F_181721344_M8SdiccOvDAhu8TtGGTcmvAygnJdSBFf.jpg" width="100" height="100"></li>
-    <li><a style="color: white;">Business Analyse: Schrauben</a></li>
-    <div class="dropdown-menu" style="float:right;">
-      <select name="dropdown">
-        <option value="default">Hersteller </option>
-        <option value="option1" href="https://www.example.com">SWG </option>
-        <option value="option2" href="https://www.example.com">Würth</option>
-        <option value="option3" href="https://www.example.com">HEKO</option>
-      </select>
-    </div>
+<div class="hamburger-menu">
+  <input id="menu__toggle" type="checkbox">
+  <label class="menu__btn" for="menu__toggle"><span></span></label>
+  <ul class="menu__box">
+    <li><a class="menu__item" href="#">Home</a></li>
+    <li><a class="menu__item" href="#">HECO</a></li>
+    <li><a class="menu__item" href="#">SWG</a></li>
+    <li><a class="menu__item" href="#">Würth</a></li>
+    <li><a class="menu__item" href="#">Team</a></li>
   </ul>
-</nav>
+</div>
 <div class="dashboard-container">
   <h3>Top 3 Hersteller:
     <div id="barchartStyle" style="width: 600px;">
@@ -64,9 +61,12 @@
   </h3>
   <script src="barchart4.js"></script>
 </div>
-<footer class="d-flex justify-content-center">
-  <ul>
-    <li><a href="#" style="color: white;">Über uns</a></li>
-    <li><a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank"><img src="https://img.icons8.com/?size=200&amp;id=rhqG5aD2_6pw&amp;format=png" width="80" height="80"></a></li>
-  </ul>
+<footer class="footer d-flex justify-content-center">
+  <div class="waves">
+    <div class="wave" id="wave1"></div>
+    <div class="wave" id="wave2"></div>
+    <div class="wave" id="wave3"></div>
+    <div class="wave" id="wave4"></div>
+  </div>
+  <ul><a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank"><img src="https://img.icons8.com/?size=200&amp;id=rhqG5aD2_6pw&amp;format=png" width="80" height="80"></a></ul>
 </footer>
