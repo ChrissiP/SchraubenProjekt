@@ -279,27 +279,26 @@ app.get('/sales/SWG', async (_req, res) => {
 // Wuerth
 app.get('/sales/Wuerth', async (_req, res) => {
   try {
+    const startOfMonth = new Date(currentDate.getFullYear(), currentMonth - 1, 1);
+    const endOfMonth = new Date(currentDate.getFullYear(), currentMonth, 0);
+
     const umsatz = await Schraube.aggregate([
       {
         $match: {
-          Hersteller: "Wuerth"
+          Hersteller: "Wuerth",
+          Datum: { $gte: startOfMonth, $lte: endOfMonth }
         }
       },
       {
         $group: {
-          _id: {
-            Schraube: "$Schraube",
-            Monat: { $month: { $toDate: "$Datum" } }
-          },
+          _id: null,
           Umsatz: { $sum: { $multiply: ["$Preis", "$VerkaufteMenge"] } }
         }
       },
       {
         $project: {
           _id: 0,
-          Schraube: "$_id.Schraube",
-          Monat: "$_id.Monat",
-          Umsatz: { $concat: [ "€", { $toString: "$Umsatz" } ] }
+          Umsatz: { $concat: ["€", { $toString: "$Umsatz" }] }
         }
       }
     ]).allowDiskUse(true);
@@ -311,6 +310,7 @@ app.get('/sales/Wuerth', async (_req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 const PORT = process.env.PORT || 3000;
