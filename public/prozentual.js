@@ -16,7 +16,8 @@ async function generateChart() {
         labels: labels,
         datasets: [{
           data: values,
-          backgroundColor: ['red', 'green', 'blue'] // Farben für die Hersteller anpassen
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)', // Farben für die Hersteller anpassen
         }]
       },
       options: {
