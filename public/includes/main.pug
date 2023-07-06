@@ -15,33 +15,17 @@ div.dashboard-container
   script(src="barchart2.js")
 
 div.dashboard-container1
-  h3 Hersteller % Anteil:
-    div(id="prozentualStyle", style="width: 450px;")
-      canvas#prozentual
-  script(src="prozentual.js")
-
   h3 Umsatz pro Schraubenart pro Monat:
     div(id="barchart3Style", style="width: 600px;")
       canvas#barchart3
   script(src="barchart3.js")
 
+  h3 Hersteller % Anteil:
+    div(id="prozentualStyle", style="width: 400px;")
+      canvas#prozentual
+  script(src="prozentual.js")
+
   h3 Gesamtumsatz pro Hersteller für einen Monat:
     div(id="barchart4Style", style="width: 600px;")
       canvas#barchart4
   script(src="barchart4.js")
-
-  div.dashboard-container2
-  h3 Gesamtumsatz Würth:
-    div(id="wuerthStyle", style="width: 600px;")
-      canvas#wuerth
-  script(src="wuerth.js")
-
-  h3 Gesamtumsatz HECO:
-    div(id="hecoStyle", style="width: 600px;")
-      canvas#heco
-  script(src="heco.js")
-
-  h3 Gesamtumsatz SWG:
-    div(id="swgStyle", style="width: 600px;")
-      canvas#swg
-  script(src="swg.js")

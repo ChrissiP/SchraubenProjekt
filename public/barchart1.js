@@ -15,7 +15,7 @@ async function createChart() {
     datasets: [{
       label: 'Bester Verkaufstag',
       data: datasetData,
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      backgroundColor: 'rgba(255, 206, 86, 0.2)',
       borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 1
     }]
