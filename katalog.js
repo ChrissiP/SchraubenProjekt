@@ -311,6 +311,66 @@ router.get('/sales/top3bt', async (_req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+router.get('/sales/umsatzProSchraubenartProMonat/btn', async (_req, res) => {
+  try {
+    const umsatzProSchraubenartProMonat = await Schraube.aggregate([
+      {
+        $match: { VerkaufteMenge: { $gt: 0 } }
+      },
+      {
+        $addFields: {
+          convertedDatum: {
+            $dateFromString: {
+              dateString: {
+                $concat: [
+                  "$Datum", "T00:00:00Z"
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            Schraubenart: "$Schraube",
+            Jahr: { $year: "$convertedDatum" },
+            Monat: { $month: "$convertedDatum" }
+          },
+          Umsatz: { $sum: { $multiply: ["$VerkaufteMenge", "$Preis"] } }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          Schraubenart: "$_id.Schraubenart",
+          Jahr: "$_id.Jahr",
+          Monat: "$_id.Monat",
+          Umsatz: 1
+        }
+      },
+      {
+        $sort:
+        {
+          Jahr: 1,
+          Monat: 1,
+          Schraubenart: 1
+        }
+      }
+    ]).allowDiskUse(true);
+
+    const xls = json2xls(umsatzProSchraubenartProMonat);
+    const fileName = 'umsatzProSchraubenartProMonat.xlsx';
+    fs.writeFileSync(fileName, xls, 'binary');
+
+    res.download(fileName);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 router.get('/sales/top3', async (_req, res) => {
     try {
       const top3 = await Schraube.aggregate([
