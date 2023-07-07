@@ -4,8 +4,16 @@ const Schraube = require('./schraubenModel')
 const mongoose = require('mongoose');
 const json2xls = require('json2xls');
 const fs = require('fs');
+const cors = require('cors');
 
+router.use(cors());
 
+router.use((req,res,next)=>{
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
+  next(); 
+})
 
 // Top 3 Hersteller: Präsentiert die drei Hersteller mit den höchsten Verkaufszahlen.
 router.get('/sales/top3hersteller', async (_req, res) => {
@@ -274,6 +282,8 @@ router.get('/sales/Wuerth', async (_req, res) => {
       }
     ]).allowDiskUse(true);
 
+    
+
     res.json(umsatz);
     console.log(umsatz);
   } catch (err) {
@@ -301,6 +311,21 @@ router.get('/sales/top3bt', async (_req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
+router.get('/sales/top3', async (_req, res) => {
+    try {
+      const top3 = await Schraube.aggregate([
+        { $match: { VerkaufteMenge: { $gt: 0 } } }, // Filtert Dokumente mit einer Verkaufsmenge größer als 0
+        { $group: { _id: "$Schraube", count: { $sum: "$VerkaufteMenge" } } },
+        { $sort: { count: -1 } },
+        { $limit: 3 }
+      ]).allowDiskUse(true);
+  
+      res.json(top3);
+      console.log(top3);
+    } catch (err) {
+      console.log('Error:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 module.exports = router;
