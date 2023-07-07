@@ -53,12 +53,18 @@ npm init && npm install && npm install pug-cli -g path fs && npm install pug && 
 ## Verwendung
 
 Mit der index.pug kreiieren wir die Startseite!
+und die hersteller Seiten.
 
 
 ```shell
 
 $ pug -w index.pug -o ./public -P
 
+$ pug -w heco.pug -o ./public -P
+
+$ pug -w swg.pug -o ./public -P
+
+$ pug -w wuerth.pug -o ./public -P
 ```
 
 ## Start
