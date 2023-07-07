@@ -19,6 +19,7 @@ Dieses Projekt hat das Ziel, ein interaktives Dashboard zu erstellen, das Verkau
 
 
 Nachfolgend findest du die einzelnen Schritte um die nötigen Programme zu installieren, damit die Webseite auch über den Port 3000 laufen kann.
+um alle Befehle auf einmal zu installieren findest du unter der auflistung unter ##BEFEHLE nochmal alles zusammengeführt.
 
 
 ```shell
@@ -42,17 +43,28 @@ $ npm install cjs
 $ npm install cors
 
 $ npm install node-fetch
+
+## BEFEHLE:
+npm init && npm install && npm install pug-cli -g path fs && npm install pug && npm install express && npm install mongoose && npm install mongodb@4.0 && npm install cjs && npm install cors && npm install node-fetch -y
+
+
 ```
 
 ## Verwendung
 
 Mit der index.pug kreiieren wir die Startseite!
+und die hersteller Seiten.
 
 
 ```shell
 
 $ pug -w index.pug -o ./public -P
 
+$ pug -w heco.pug -o ./public -P
+
+$ pug -w swg.pug -o ./public -P
+
+$ pug -w wuerth.pug -o ./public -P
 ```
 
 ## Start
