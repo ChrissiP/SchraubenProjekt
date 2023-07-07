@@ -1,0 +1,9 @@
+include ./public/includes/boilerplate
+include ./public/includes/navbar
+block main
+    div.dashboard-container
+        h3.class#h3hersteller Gesamtumsatz HECO:
+            div(id="hecoStyle", style="width: 600px;")
+            canvas#heco
+        script(src="heco.js")
+include ./public/includes/footer

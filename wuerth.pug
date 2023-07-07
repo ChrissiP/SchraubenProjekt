@@ -1,0 +1,9 @@
+include ./public/includes/boilerplate
+include ./public/includes/navbar
+block main
+    div.dashboard-container2
+        h3.class#h3hersteller Gesamtumsatz Würth
+            div(id="wuerthStyle", style="width: 600px;")
+            canvas#wuerth
+        script(src="wuerth.js")
+include ./public/includes/footer

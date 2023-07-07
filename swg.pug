@@ -1,0 +1,9 @@
+include ./public/includes/boilerplate
+include ./public/includes/navbar
+block main
+    div.dashboard-container2
+        h3.class#h3hersteller Gesamtumsatz Würth
+            div(id="swgStyle", style="width: 600px;")
+            canvas#swg
+        script(src="swg.js")
+include ./public/includes/footer
