@@ -1,9 +1,23 @@
 include ./public/includes/boilerplate
 include ./public/includes/navbar
 block main
-    div.dashboard-container2
+    img(src="/public/images/pngwing.com.png", class="wuerth")
+    div.dashboard-wuerth
         h3.class#h3hersteller Gesamtumsatz Würth
-            div(id="wuerthStyle", style="width: 600px;")
+            div(id="wuerthStyle", style="width: 1000px;")
             canvas#wuerth
         script(src="wuerth.js")
-include ./public/includes/footer
+footer.wuerth(class="d-flex justify-content-center")
+  .waves
+    .wave#wave1
+    .wave#wave2
+    .wave#wave3
+    .wave#wave4
+    ul
+      a(href="https://www.linkedin.com/", target="_blank")
+        img(src="https://img.icons8.com/?size=512&id=IuI5Yd3J3qcC&format=png" width="80" height="80" )
+      a(href="https://www.youtube.com/watch?v=xvFZjo5PgG0", target="_blank")
+        img(src="https://img.icons8.com/?size=200&id=rhqG5aD2_6pw&format=png" width="80" height="80" )
+      a(href="https://github.com/ChrissiP/SchraubenProjekt", target="_blank")
+        img(src="https://img.icons8.com/?size=512&id=4Z2nCrz5iPY2&format=png" width="80" height="80" )
+      p.footer-company-name Company Karin, Christina, Christoph, Pasi, Stefan © 2023
