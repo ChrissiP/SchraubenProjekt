@@ -69,7 +69,20 @@ h2::before {
 h2:hover::before {
   width: 100%;
 }
- 
+#downloadChartButton {
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 20px;
+  font-size: 15px;
+  color: rgb(16, 12, 12);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#downloadChartButton:hover {
+  background-color: rgba(54, 162, 235, 0.2);
+}
+
 .dashboard-container {
     display:flex;
     justify-content:center;
@@ -175,7 +188,7 @@ h3 {
     transition-duration: .25s;
   }
   .menu__item:hover {
-    background-color: #CFD8DC;
+    background-color: rgba(54, 162, 235, 0.2);
   }
    
 .footer {

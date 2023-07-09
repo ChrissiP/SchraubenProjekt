@@ -1,3 +1,21 @@
+async function downloadChartAsExcel() {
+  try {
+    const response = await fetch('http://localhost:3000/sales/umsatzProSchraubenartProMonat');
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'umsatzProSchraubenartProMonat.xlsx';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error(err);
+    alert('Beim Herunterladen des Charts ist ein Fehler aufgetreten.');
+  }
+}
 // Generiere den Chart
 async function generateChart() {
     try {
@@ -53,6 +71,9 @@ async function generateChart() {
       console.log('Error:', err);
     }
   }
+    // Erstelle den Button für den Download
+    const button = document.getElementById('downloadChartButton');
+    button.addEventListener('click', downloadChartAsExcel);
   
   generateChart();
   
