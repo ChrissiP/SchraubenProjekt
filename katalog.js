@@ -1,34 +1,35 @@
-const express = require('express');
-const router = express.Router();
-const Schraube = require('./schraubenModel')
-const mongoose = require('mongoose');
-const json2xls = require('json2xls');
-const fs = require('fs');
-const cors = require('cors');
+const express = require('express'); // Importiert das Express-Framework
+const router = express.Router(); // Erstellt einen Router
+const Schraube = require('./schraubenModel'); // Importiert das Modell für Schrauben
+const mongoose = require('mongoose'); // Importiert Mongoose für die Datenbankverbindung
+const json2xls = require('json2xls'); // Importiert das Modul zum Konvertieren von JSON in XLSX
+const fs = require('fs'); // Importiert das Modul zum Lesen/Schreiben von Dateien
+const cors = require('cors'); // Importiert das CORS-Modul für Cross-Origin-Anfragen
 
-router.use(cors());
+router.use(cors()); // Aktiviert CORS für den Router
 
-router.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
-  res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
-  next(); 
-})
+router.use((req, res, next) => { // Definiert eine Middleware-Funktion
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Setzt die CORS-Header
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
+  next(); // Ruft die nächste Middleware-Funktion auf
+});
 
 // Top 3 Hersteller: Präsentiert die drei Hersteller mit den höchsten Verkaufszahlen.
 router.get('/sales/top3hersteller', async (_req, res) => {
   try {
+    // Führt eine Aggregation durch, um die Top 3 Hersteller zu ermitteln
     const top3hersteller = await Schraube.aggregate([
       { $match: { VerkaufteMenge: { $gt: 0 } } }, // Filtert Dokumente mit einer Verkaufsmenge größer als 0
-      { $group: { _id: "$Hersteller", count: { $sum: "$VerkaufteMenge" } } },
-      { $sort: { count: -1 } },
-      { $limit: 3 }
-    ]).allowDiskUse(true);
-    res.json(top3hersteller);
-    console.log(top3hersteller);
+      { $group: { _id: "$Hersteller", count: { $sum: "$VerkaufteMenge" } } }, // Gruppiert nach Hersteller und summiert die Verkaufsmengen
+      { $sort: { count: -1 } }, // Sortiert absteigend nach der Summe
+      { $limit: 3 } // Begrenzt auf die ersten 3 Ergebnisse
+    ]).allowDiskUse(true); // Ermöglicht die Verwendung von Festplattenspeicher für große Datenmengen
+    res.json(top3hersteller); // Sendet die Top 3 Hersteller als JSON-Antwort
+    console.log(top3hersteller); // Gibt die Top 3 Hersteller in der Konsole aus
   } catch (err) {
-    console.log('Error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+    console.log('Error:', err); // Gibt Fehler in der Konsole aus
+    res.status(500).json({ error: 'Internal server error' }); // Sendet eine Fehlerantwort mit dem HTTP-Statuscode 500
   }
 });
 // Bester Verkaufstag insgesamt: Identifiziert und zeigt den Tag mit den höchsten Gesamtverkaufszahlen an.
@@ -388,4 +389,4 @@ router.get('/sales/top3', async (_req, res) => {
     }
   });
 
-module.exports = router;
+  module.exports = router; // Exportiert den Router für die Verwendung in anderen Modulen
