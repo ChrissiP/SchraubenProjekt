@@ -62,7 +62,7 @@ npm init && npm install && npm install pug-cli -g path fs && npm install pug && 
 ## Verwendung
 
 Mit der index.pug kreiieren wir die Startseite!
-und die hersteller Seiten. Dazu führe folgende Befehle aus:
+und die hersteller Seiten mit den pug Dateien der einzellnen Hersteller. Dazu führe folgende Befehle aus:
 
 
 ```shell
@@ -84,4 +84,9 @@ Mit diesem Befehl können wir den Server starten.
 
 $ node app.js
 
+Sobald der Server läuft kommt im Terminal die Meldung:
+"Server is running on port 3000
+MongoDB connected..."
+
+Jetzt koennen wir die index.html mit rechtsclick im liveserver öffnen und dannach sehen wir im Browser unsere Seite.
 ```
