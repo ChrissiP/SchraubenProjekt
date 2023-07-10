@@ -7,6 +7,7 @@ Dieses Projekt hat das Ziel, ein interaktives Dashboard zu erstellen, das Verkau
 
 ## Inhaltsverzeichnis
 
+- [download von github: https://github.com/ChrissiP/SchraubenProjekt.git]
 
 - [Installation](#installation)
 
@@ -15,12 +16,20 @@ Dieses Projekt hat das Ziel, ein interaktives Dashboard zu erstellen, das Verkau
 - [Start](#start)
 
 
+## Download
+
+clone dir das projekt:
+
+    clicke auf den code button: und öffne das Projekt in Github Desktop und lade dir die zip. herunter
+        wenn du die zip verwendest entpacke die Datei und öffne sie in Visual Studio code.
+
 ## Installation
 
 
 Nachfolgend findest du die einzelnen Schritte um die nötigen Programme zu installieren, damit die Webseite auch über den Port 3000 laufen kann.
 um alle Befehle auf einmal zu installieren findest du unter der auflistung unter ##BEFEHLE nochmal alles zusammengeführt.
 
+öffne ein Terminal im Hauptordner deines Projektes und führe die Installationen aus.
 
 ```shell
 
@@ -38,7 +47,7 @@ $ npm install mongoose
 
 $ npm install mongodb@4.0
 
-$ npm install cjs 
+$ npm install cjs
 
 $ npm install cors
 
@@ -53,7 +62,7 @@ npm init && npm install && npm install pug-cli -g path fs && npm install pug && 
 ## Verwendung
 
 Mit der index.pug kreiieren wir die Startseite!
-und die hersteller Seiten.
+und die hersteller Seiten. Dazu führe folgende Befehle aus:
 
 
 ```shell
